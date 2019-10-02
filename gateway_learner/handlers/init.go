@@ -11,27 +11,6 @@ import (
 	"os"
 )
 
-
-func  unrestricted(next echo.HandlerFunc) echo.HandlerFunc {
-	return func(c echo.Context) error {
-		println("ok men")
-		return next(c)
-	}
-}
-func  restricted(next echo.HandlerFunc) echo.HandlerFunc {
-	return func(c echo.Context) error {
-		authorization := c.Request().Header.Get("Authorization")
-		tokenStr := authorization[7:]
-		println(tokenStr)
-		token := micro_learner_pb.Token{Token:tokenStr,Valid:false}
-		_, err := services.MicroCLI.MicroLearnerAuthClient.ValidateToken(context.Background(),&micro_learner_pb.ValidateTokenRequest{Token:&token})
-		if err != nil {
-			return c.JSON(http.StatusUnauthorized, "must login")
-		}
-		return next(c)
-	}
-}
-
 func Init() {
 
 
@@ -49,6 +28,7 @@ func Init() {
 		AllowMethods: []string{echo.GET, echo.HEAD, echo.PUT, echo.PATCH, echo.POST, echo.DELETE},
 	}))
 	// Routes
+	nonAuth.GET("/test", test)
 	nonAuth.POST("/login", login)
 	nonAuth.POST("/signup", signup)
 
@@ -73,4 +53,25 @@ func Init() {
 		port = viper.GetString("grpc.portDefault")
 	}
 	e.Logger.Fatal(e.Start(":"+port))
+}
+
+
+func  unrestricted(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		println("ok men")
+		return next(c)
+	}
+}
+func  restricted(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		authorization := c.Request().Header.Get("Authorization")
+		tokenStr := authorization[7:]
+		println(tokenStr)
+		token := micro_learner_pb.Token{Token:tokenStr,Valid:false}
+		_, err := services.MicroCLI.MicroLearnerAuthClient.ValidateToken(context.Background(),&micro_learner_pb.ValidateTokenRequest{Token:&token})
+		if err != nil {
+			return c.JSON(http.StatusUnauthorized, "must login")
+		}
+		return next(c)
+	}
 }

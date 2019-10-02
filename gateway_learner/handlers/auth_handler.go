@@ -4,8 +4,6 @@ import (
 	"context"
 	"github.com/labstack/echo/v4"
 	"github.com/mikedutuandu/micro_app/gateway_learner/services"
-	micro_teacher_pb "github.com/mikedutuandu/micro_app/micro_teacher/protos"
-
 	micro_learner_pb "github.com/mikedutuandu/micro_app/micro_learner/protos"
 	"net/http"
 	//"context"
@@ -37,7 +35,7 @@ func signup(c echo.Context) error {
 	}
 	email := m["email"].(string)
 	password := m["password"].(string)
-	user := micro_teacher_pb.User{Email:email,Password:password}
+	user := micro_learner_pb.User{Email:email,Password:password}
 	res, err := services.MicroCLI.MicroLearnerAuthClient.CreateUser(context.Background(),&micro_learner_pb.CreateUserRequest{User:&user})
 	if err != nil {
 		return c.JSON(http.StatusBadRequest,err)
@@ -45,6 +43,11 @@ func signup(c echo.Context) error {
 
 	return c.JSON(http.StatusOK,res)
 
+}
+
+func test(c echo.Context) error {
+
+	return c.JSON(http.StatusOK,"ok men")
 }
 
 func testAuth(c echo.Context) error {

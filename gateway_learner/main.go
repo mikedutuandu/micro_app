@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"github.com/mikedutuandu/micro_app/gateway_teacher/handlers"
-	"github.com/mikedutuandu/micro_app/gateway_teacher/services"
+	"github.com/mikedutuandu/micro_app/gateway_learner/handlers"
+	"github.com/mikedutuandu/micro_app/gateway_learner/services"
 	"github.com/spf13/viper"
 )
 

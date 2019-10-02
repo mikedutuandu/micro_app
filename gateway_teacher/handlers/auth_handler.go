@@ -13,7 +13,10 @@ import (
 	//services "github.com/mikedutuandu/micro_app/gateway_teacher/services"
 )
 
+func test(c echo.Context) error {
 
+	return c.JSON(http.StatusOK,"ok men")
+}
 
 func login(c echo.Context) error {
 	m := echo.Map{}

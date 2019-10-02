@@ -1,10 +1,10 @@
 grpc:
-  portDefault: 5001
+  portDefault: 5002
 
 
 micro:
   teacherHostDefault: ""
-  teacherPortDefault: 3002
+  teacherPortDefault: 3001
   learnerHostDefault: ""
   learnerPortDefault: 3002
   bookingHostDefault: ""

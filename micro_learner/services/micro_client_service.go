@@ -7,7 +7,7 @@ import (
 
 
 type MicroClient struct{
-	microTeacherClient micro_teacher_pb.AuthServiceClient
+	microTeacherClient micro_teacher_pb.TeacherServiceClient
 	microBookingClient micro_booking_pb.BookingServiceClient
 }
 

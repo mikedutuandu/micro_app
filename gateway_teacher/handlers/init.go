@@ -24,7 +24,7 @@ func  restricted(next echo.HandlerFunc) echo.HandlerFunc {
 		tokenStr := authorization[7:]
 		println(tokenStr)
 		token := micro_teacher_pb.Token{Token:tokenStr,Valid:false}
-		_, err := services.MicroCLI.MicroTeacherClient.ValidateToken(context.Background(),&micro_teacher_pb.ValidateTokenRequest{Token:&token})
+		_, err := services.MicroCLI.MicroTeacherAuthClient.ValidateToken(context.Background(),&micro_teacher_pb.ValidateTokenRequest{Token:&token})
 		if err != nil {
 			return c.JSON(http.StatusUnauthorized, "must login")
 		}

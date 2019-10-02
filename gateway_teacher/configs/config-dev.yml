@@ -4,7 +4,7 @@ grpc:
 
 micro:
   teacherHostDefault: ""
-  teacherPortDefault: 3002
+  teacherPortDefault: 3001
   learnerHostDefault: ""
   learnerPortDefault: 3002
   bookingHostDefault: ""

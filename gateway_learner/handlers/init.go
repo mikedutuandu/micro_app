@@ -4,8 +4,8 @@ import (
 	"context"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/mikedutuandu/micro_app/gateway_teacher/services"
-	micro_teacher_pb "github.com/mikedutuandu/micro_app/micro_teacher/protos"
+	services "github.com/mikedutuandu/micro_app/gateway_learner/services"
+	micro_learner_pb "github.com/mikedutuandu/micro_app/micro_learner/protos"
 	"github.com/spf13/viper"
 	"net/http"
 	"os"
@@ -23,8 +23,8 @@ func  restricted(next echo.HandlerFunc) echo.HandlerFunc {
 		authorization := c.Request().Header.Get("Authorization")
 		tokenStr := authorization[7:]
 		println(tokenStr)
-		token := micro_teacher_pb.Token{Token:tokenStr,Valid:false}
-		_, err := services.MicroCLI.MicroTeacherClient.ValidateToken(context.Background(),&micro_teacher_pb.ValidateTokenRequest{Token:&token})
+		token := micro_learner_pb.Token{Token:tokenStr,Valid:false}
+		_, err := services.MicroCLI.MicroLearnerAuthClient.ValidateToken(context.Background(),&micro_learner_pb.ValidateTokenRequest{Token:&token})
 		if err != nil {
 			return c.JSON(http.StatusUnauthorized, "must login")
 		}

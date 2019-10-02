@@ -3,9 +3,10 @@ package handlers
 import (
 	"context"
 	"github.com/labstack/echo/v4"
-	"github.com/mikedutuandu/micro_app/gateway_teacher/services"
-
+	"github.com/mikedutuandu/micro_app/gateway_learner/services"
 	micro_teacher_pb "github.com/mikedutuandu/micro_app/micro_teacher/protos"
+
+	micro_learner_pb "github.com/mikedutuandu/micro_app/micro_learner/protos"
 	"net/http"
 	//"context"
 	//"log"
@@ -22,7 +23,7 @@ func login(c echo.Context) error {
 	}
 	email := m["email"].(string)
 	password := m["password"].(string)
-	res, err := services.MicroCLI.MicroTeacherClient.Auth(context.Background(),&micro_teacher_pb.AuthRequest{Email: email,Password:password})
+	res, err := services.MicroCLI.MicroLearnerAuthClient.Auth(context.Background(),&micro_learner_pb.AuthRequest{Email: email,Password:password})
 	if err != nil {
 		return c.JSON(http.StatusUnauthorized,err)
 	}
@@ -37,7 +38,7 @@ func signup(c echo.Context) error {
 	email := m["email"].(string)
 	password := m["password"].(string)
 	user := micro_teacher_pb.User{Email:email,Password:password}
-	res, err := services.MicroCLI.MicroTeacherClient.CreateUser(context.Background(),&micro_teacher_pb.CreateUserRequest{User:&user})
+	res, err := services.MicroCLI.MicroLearnerAuthClient.CreateUser(context.Background(),&micro_learner_pb.CreateUserRequest{User:&user})
 	if err != nil {
 		return c.JSON(http.StatusBadRequest,err)
 	}

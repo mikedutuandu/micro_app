@@ -2,7 +2,7 @@ package services
 
 import (
 	micro_booking_pb "github.com/mikedutuandu/micro_app/micro_booking/protos"
-	micro_teacher_pb "github.com/mikedutuandu/micro_app/micro_learner/protos"
+	micro_teacher_pb "github.com/mikedutuandu/micro_app/micro_teacher/protos"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -62,7 +62,7 @@ func Init() {
 	//defer ccBooking.Close()
 
 
-	teacherClient := micro_teacher_pb.NewAuthServiceClient(ccTeacher)
+	teacherClient := micro_teacher_pb.NewTeacherServiceClient(ccTeacher)
 	fmt.Printf("Created client: %f", teacherClient)
 
 	bookingClient := micro_booking_pb.NewBookingServiceClient(ccBooking)

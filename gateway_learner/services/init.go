@@ -79,16 +79,20 @@ func Init() {
 	learnerClient := micro_learner_pb.NewLearnerServiceClient(ccLearner)
 	fmt.Printf("Created client: %f", learnerClient)
 
+	learnerAuthClient := micro_learner_pb.NewAuthServiceClient(ccLearner)
+	fmt.Printf("Created client: %f", learnerAuthClient)
+
 	bookingClient := micro_booking_pb.NewBookingServiceClient(ccBooking)
 	fmt.Printf("Created client: %f", bookingClient)
 
-	teacherClient := micro_teacher_pb.NewAuthServiceClient(ccTeacher)
+	teacherClient := micro_teacher_pb.NewTeacherServiceClient(ccTeacher)
 	fmt.Printf("Created client: %f", bookingClient)
 
 
 	MicroCLI.MicroLearnerClient = learnerClient
 	MicroCLI.MicroBookingClient = bookingClient
 	MicroCLI.MicroTeacherClient = teacherClient
+	MicroCLI.MicroLearnerAuthClient = learnerAuthClient
 
 	println("Init Service")
 

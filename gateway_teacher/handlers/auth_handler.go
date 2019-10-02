@@ -22,7 +22,7 @@ func login(c echo.Context) error {
 	}
 	email := m["email"].(string)
 	password := m["password"].(string)
-	res, err := services.MicroCLI.MicroTeacherClient.Auth(context.Background(),&micro_teacher_pb.AuthRequest{Email: email,Password:password})
+	res, err := services.MicroCLI.MicroTeacherAuthClient.Auth(context.Background(),&micro_teacher_pb.AuthRequest{Email: email,Password:password})
 	if err != nil {
 		return c.JSON(http.StatusUnauthorized,err)
 	}
@@ -37,7 +37,7 @@ func signup(c echo.Context) error {
 	email := m["email"].(string)
 	password := m["password"].(string)
 	user := micro_teacher_pb.User{Email:email,Password:password}
-	res, err := services.MicroCLI.MicroTeacherClient.CreateUser(context.Background(),&micro_teacher_pb.CreateUserRequest{User:&user})
+	res, err := services.MicroCLI.MicroTeacherAuthClient.CreateUser(context.Background(),&micro_teacher_pb.CreateUserRequest{User:&user})
 	if err != nil {
 		return c.JSON(http.StatusBadRequest,err)
 	}

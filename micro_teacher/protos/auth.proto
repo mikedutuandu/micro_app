@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package micro_teacher;
+
+option go_package = "micro_teacher_pb";
+
+
+message User {
+    string id = 1;
+    string name = 2;
+    string company = 3;
+    string email = 4;
+    string password = 5;
+}
+
+message Token {
+    string token = 1;
+    bool valid = 2;
+}
+
+
+message CreateUserRequest {
+    User user = 1;
+}
+message CreateUserResponse {
+    Token token = 2;
+}
+
+message AuthRequest {
+    string email=1;
+    string password=2;
+}
+message AuthResponse {
+    Token token = 2;
+}
+
+message ValidateTokenRequest {
+    Token token=1;
+}
+message ValidateTokenResponse {
+    Token token=1;
+}
+
+service AuthService {
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+    rpc Auth(AuthRequest) returns (AuthResponse);
+    rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
+}

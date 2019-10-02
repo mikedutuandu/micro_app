@@ -1,0 +1,23 @@
+grpc:
+  portDefault: 3002
+
+pub:
+  projectID: learn-drive-253814
+
+sub:
+  projectID: learn-drive-253814
+
+repo:
+  mongoConnectString: mongodb+srv://admin:110289@bookingcluster-tgpah.gcp.mongodb.net/test?retryWrites=true&w=majority
+  mongoDBName: learner
+
+micro:
+  teacherHostDefault: ""
+  teacherPortDefault: 3001
+  bookingHostDefault: ""
+  bookingPortDefault: 3003
+
+jwt:
+  secretKey: mySuperSecretKeyLol
+  tokenExpired: 72 #hour
+  issuer: micro_learner #hour

@@ -1,0 +1,11 @@
+grpc:
+  portDefault: 5001
+
+
+micro:
+  teacherHostDefault: ""
+  teacherPortDefault: 3002
+  learnerHostDefault: ""
+  learnerPortDefault: 3002
+  bookingHostDefault: ""
+  bookingPortDefault: 3003

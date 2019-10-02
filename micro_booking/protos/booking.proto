@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package micro_booking;
+
+option go_package = "micro_booking_pb";
+
+
+
+
+
+message HelloRequest {
+
+}
+message HelloResponse {
+
+}
+
+
+
+service BookingService {
+    rpc Hello(HelloRequest) returns (HelloResponse);
+
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package micro_teacher;
+
+option go_package = "micro_teacher_pb";
+
+
+
+
+
+message HelloRequest {
+
+}
+message HelloResponse {
+
+}
+
+
+
+service TeacherService {
+    rpc Hello(HelloRequest) returns (HelloResponse);
+
+}

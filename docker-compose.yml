@@ -1,0 +1,86 @@
+version: '3'
+services:
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '8080:80'
+
+  gateway_learner:
+    restart: always
+    image: golang:latest
+    volumes:
+      - ./gateway_learner:/go/src/app
+    working_dir: /go/src/app
+    command: go run .
+    environment:
+      - MICRO_TEACHER_HOST=micro_teacher
+      - MICRO_TEACHER_PORT=3001
+      - MICRO_LEARNER_HOST=micro_learner
+      - MICRO_LEARNER_PORT=3002
+      - MICRO_BOOKING_HOST=micro_booking
+      - MICRO_BOOKING_PORT=3003
+      - PORT=5002
+
+
+  gateway_teacher:
+    restart: always
+    image: golang:latest
+    volumes:
+      - ./gateway_teacher:/go/src/app
+    working_dir: /go/src/app
+    command: go run .
+    environment:
+      - MICRO_TEACHER_HOST=micro_teacher
+      - MICRO_TEACHER_PORT=3001
+      - MICRO_LEARNER_HOST=micro_learner
+      - MICRO_LEARNER_PORT=3002
+      - MICRO_BOOKING_HOST=micro_booking
+      - MICRO_BOOKING_PORT=3003
+      - PORT=5001
+
+  micro_teacher:
+    restart: always
+    image: golang:latest
+    volumes:
+      - ./micro_teacher:/go/src/app
+    working_dir: /go/src/app
+    command: go run .
+    environment:
+      - MICRO_LEARNER_HOST=micro_learner
+      - MICRO_LEARNER_PORT=3002
+      - MICRO_BOOKING_HOST=micro_booking
+      - MICRO_BOOKING_PORT=3003
+      - PORT=3001
+
+  micro_learner:
+    restart: always
+    image: golang:latest
+    volumes:
+      - ./micro_learner:/go/src/app
+    working_dir: /go/src/app
+    command: go run .
+    environment:
+      - MICRO_TEACHER_HOST=micro_teacher
+      - MICRO_TEACHER_PORT=3001
+      - MICRO_BOOKING_HOST=micro_booking
+      - MICRO_BOOKING_PORT=3003
+      - PORT=3002
+
+  micro_booking:
+    restart: always
+    image: golang:latest
+    volumes:
+      - ./micro_booking:/go/src/app
+    working_dir: /go/src/app
+    command: go run .
+    environment:
+      - MICRO_TEACHER_HOST=micro_teacher
+      - MICRO_TEACHER_PORT=3001
+      - MICRO_LEARNER_HOST=micro_learner
+      - MICRO_LEARNER_PORT=3002
+      - PORT=3003
+
+

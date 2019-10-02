@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package micro_learner;
+
+option go_package = "micro_learner_pb";
+
+
+
+
+
+message HelloRequest {
+
+}
+message HelloResponse {
+
+}
+
+
+
+service LearnerService {
+    rpc Hello(HelloRequest) returns (HelloResponse);
+
+}

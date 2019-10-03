@@ -15,10 +15,17 @@ before_install:
   - gcloud config set compute/zone asia-southeast1-a
   - gcloud container clusters get-credentials mike-k8s
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t mikedutuandu/react-test -f ./client/Dockerfile.dev ./client
-
+  - docker build -t mikedutuandu/micro_teacher_test -f ./micro_teacher/Dockerfile.dev ./micro_teacher
+  - docker build -t mikedutuandu/micro_learner_test -f ./micro_learner/Dockerfile.dev ./micro_learner
+  - docker build -t mikedutuandu/micro_booing_test -f ./micro_booking/Dockerfile.dev ./micro_booking
+  - docker build -t mikedutuandu/gateway_teacher_test -f ./gateway_teacher/Dockerfile.dev ./gateway_teacher
+  - docker build -t mikedutuandu/gateway_learner_test -f ./gateway_learner/Dockerfile.dev ./gateway_learner
 script:
-  - docker run mikedutuandu/react-test npm test -- --coverage
+  - docker run mikedutuandu/micro_teacher_test go test -cover
+  - docker run mikedutuandu/micro_learner_test go test -cover
+  - docker run mikedutuandu/micro_booing_test go test -cover
+  - docker run mikedutuandu/gateway_teacher_test go test -cover
+  - docker run mikedutuandu/gateway_learner_test go test -cover
 
 deploy:
   provider: script

@@ -53,6 +53,6 @@ func test(c echo.Context) error {
 func testAuth(c echo.Context) error {
 
 
-	return c.JSON(http.StatusOK,"logined")
+	return c.JSON(http.StatusOK,"logined ok")
 
 }

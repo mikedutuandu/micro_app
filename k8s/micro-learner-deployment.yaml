@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: micro_learner_deployment
+  name: micro-learner-deployment
 spec:
   replicas: 1
   selector:

@@ -17,8 +17,8 @@ docker push mikedutuandu/gateway_teacher:$SHA
 docker push mikedutuandu/gateway_learner:$SHA
 
 kubectl apply -f k8s
-kubectl set image deployments/micro_teacher_deployment server=mikedutuandu/micro_teacher:$SHA
-kubectl set image deployments/micro_learner_deployment server=mikedutuandu/micro_learner:$SHA
-kubectl set image deployments/micro_booking_deployment server=mikedutuandu/micro_booking:$SHA
-kubectl set image deployments/gateway_teacher_deployment server=mikedutuandu/gateway_teacher:$SHA
-kubectl set image deployments/gateway_learner_deployment server=mikedutuandu/gateway_learner:$SHA
+kubectl set image deployments/micro-teacher-deployment server=mikedutuandu/micro_teacher:$SHA
+kubectl set image deployments/micro-learner-deployment server=mikedutuandu/micro_learner:$SHA
+kubectl set image deployments/micro-booking-deployment server=mikedutuandu/micro_booking:$SHA
+kubectl set image deployments/gateway-teacher-deployment server=mikedutuandu/gateway_teacher:$SHA
+kubectl set image deployments/gateway-learner-deployment server=mikedutuandu/gateway_learner:$SHA

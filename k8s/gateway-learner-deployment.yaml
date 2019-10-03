@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway_teacher_deployment
+  name: gateway-learner-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: gateway_teacher
+      component: gateway-learner
   template:
     metadata:
       labels:
-        component: gateway_teacher
+        component: gateway-learner
     spec:
       containers:
-        - name: gateway_teacher
-          image: mikedutuandu/gateway_teacher
+        - name: gateway-learner
+          image: mikedutuandu/gateway_learner
           ports:
-            - containerPort: 5001
+            - containerPort: 5002
           env:
             - name: MICRO_TEACHER_HOST
-              value: micro_teacher_cluster_ip_service
+              value: micro-teacher-cluster-ip-service
             - name: MICRO_TEACHER_PORT
               value: '3001'
             - name: MICRO_LEARNER_HOST
-              value: micro_learner_cluster_ip_service
+              value: micro-learner-cluster-ip-service
             - name: MICRO_LEARNER_PORT
               value: '3002'
             - name: MICRO_BOOKING_HOST
-              value: micro_booking_cluster_ip_service
+              value: micro-booking-cluster-ip-service
             - name: MICRO_BOOKING_PORT
               value: '3003'
 

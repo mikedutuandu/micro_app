@@ -19,20 +19,20 @@ spec:
         paths:
           - path: /teacher/?(.*)
             backend:
-              serviceName: gateway_teacher_cluster_ip_service
+              serviceName: gateway-teacher-cluster-ip-service
               servicePort: 5001
           - path: /learner/?(.*)
             backend:
-              serviceName: gateway_learner_cluster_ip_service
+              serviceName: gateway-learner-cluster-ip-service
               servicePort: 5002
     - host: www.mikedutuandu.com
       http:
         paths:
           - path: /teacher/?(.*)
             backend:
-              serviceName: gateway_teacher_cluster_ip_service
+              serviceName: gateway-teacher-cluster-ip-service
               servicePort: 5001
           - path: /learner/?(.*)
             backend:
-              serviceName: gateway_learner_cluster_ip_service
+              serviceName: gateway-learner-cluster-ip-service
               servicePort: 5002

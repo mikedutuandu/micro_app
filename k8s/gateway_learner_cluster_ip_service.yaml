@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway_learner_cluster_ip_service
+spec:
+  type: ClusterIP
+  selector:
+    component: gateway_learner
+  ports:
+    - port: 5002
+      targetPort: 5002

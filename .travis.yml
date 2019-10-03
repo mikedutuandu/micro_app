@@ -21,11 +21,11 @@ before_install:
   - docker build -t mikedutuandu/gateway_teacher_test -f ./gateway_teacher/Dockerfile.dev ./gateway_teacher
   - docker build -t mikedutuandu/gateway_learner_test -f ./gateway_learner/Dockerfile.dev ./gateway_learner
 script:
-  - docker run mikedutuandu/micro_teacher_test go test -cover
-  - docker run mikedutuandu/micro_learner_test go test -cover
-  - docker run mikedutuandu/micro_booing_test go test -cover
-  - docker run mikedutuandu/gateway_teacher_test go test -cover
-  - docker run mikedutuandu/gateway_learner_test go test -cover
+  - docker run mikedutuandu/micro_teacher_test go test ./... -cover
+  - docker run mikedutuandu/micro_learner_test go test ./... -cover
+  - docker run mikedutuandu/micro_booing_test go test ./... -cover
+  - docker run mikedutuandu/gateway_teacher_test go test ./... -cover
+  - docker run mikedutuandu/gateway_learner_test go test ./... -cover
 
 deploy:
   provider: script

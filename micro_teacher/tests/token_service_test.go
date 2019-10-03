@@ -1,14 +1,15 @@
-package main
+package tests
 
 import (
 	"strings"
 	"testing"
 
-	pb "github.com/mikedutuandu/shippy-user-service/proto/auth"
+	auth "github.com/mikedutuandu/micro_app/micro_teacher/protos"
+	services "github.com/mikedutuandu/micro_app/micro_teacher/services"
 )
 
 var (
-	user = &pb.User{
+	user = &auth.User{
 		Id:    "abc123",
 		Email: "ewan.valentine89@gmail.com",
 	}
@@ -16,28 +17,19 @@ var (
 
 type MockRepo struct{}
 
-func (repo *MockRepo) GetAll() ([]*pb.User, error) {
-	var users []*pb.User
-	return users, nil
-}
 
-func (repo *MockRepo) Get(id string) (*pb.User, error) {
-	var user *pb.User
-	return user, nil
-}
+func (repo *MockRepo) CreateUser(user *auth.User) error {
 
-func (repo *MockRepo) Create(user *pb.User) error {
 	return nil
 }
 
-func (repo *MockRepo) GetByEmail(email string) (*pb.User, error) {
-	var user *pb.User
+func (repo *MockRepo) GetUserByEmail(email string) (*auth.User, error) {
+	var user *auth.User
 	return user, nil
 }
 
-func newInstance() Authable {
-	repo := &MockRepo{}
-	return &TokenService{repo}
+func newInstance() services.Authable {
+	return &services.TokenService{}
 }
 
 func TestCanCreateToken(t *testing.T) {

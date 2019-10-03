@@ -69,8 +69,8 @@ func Init() {
 	fmt.Printf("Created client: %f", bookingClient)
 
 
-	MicroCLI.microLearnerClient = learnerClient
-	MicroCLI.microBookingClient = bookingClient
+	MicroCLI.MicroLearnerClient = learnerClient
+	MicroCLI.MicroBookingClient = bookingClient
 
 	println("Init Service")
 

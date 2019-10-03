@@ -9,7 +9,7 @@ import (
 )
 
 
-var TeacherSub TeacherSubscriber
+var TeacherSub teacherSubscriber
 func Init()  {
 	//Init
 	ctx := context.Background()

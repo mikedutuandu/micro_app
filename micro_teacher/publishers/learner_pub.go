@@ -8,12 +8,12 @@ import (
 
 
 
-type Publisher struct{
+type learnerPublisher struct{
 	client *pubsub.Client
 }
 
 
-func (p Publisher) pubMessage(){
+func (p learnerPublisher) pubMessage(){
 	//test pub
 	ctx := context.Background()
 

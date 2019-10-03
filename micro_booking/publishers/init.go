@@ -7,7 +7,7 @@ import (
 	"context"
 )
 
-var LearnerPub LearnerPublisher
+var LearnerPub learnerPublisher
 func Init()  {
 	//Init
 	ctx := context.Background()

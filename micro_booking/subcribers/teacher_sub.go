@@ -9,12 +9,12 @@ import (
 
 
 
-type TeacherSubscriber struct{
+type teacherSubscriber struct{
 	client *pubsub.Client
 }
 
 
-func (s TeacherSubscriber) SubHello()  {
+func (s teacherSubscriber) SubHello()  {
 	ctx := context.Background()
 
 	topic := s.client.Topic("topicName")

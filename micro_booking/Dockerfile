@@ -6,6 +6,6 @@ ENV GO111MODULE=on
 COPY . .
 
 RUN go get -d -v ./...
-RUN go install -v ./...
+RUN go build -o main .
 
-CMD ["app"]
+CMD ["./main"]

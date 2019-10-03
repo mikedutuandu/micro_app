@@ -23,7 +23,10 @@ services:
       - MICRO_BOOKING_HOST=micro_booking
       - MICRO_BOOKING_PORT=3003
       - PORT=5002
-
+    depends_on:
+      - micro_teacher
+      - micro_learner
+      - micro_booking
 
   gateway_teacher:
     restart: always
@@ -40,6 +43,10 @@ services:
       - MICRO_BOOKING_HOST=micro_booking
       - MICRO_BOOKING_PORT=3003
       - PORT=5001
+    depends_on:
+      - micro_teacher
+      - micro_learner
+      - micro_booking
 
   micro_teacher:
     restart: always

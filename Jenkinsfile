@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SHA=sh '$(git rev-parse HEAD)'
+
         CLOUDSDK_CORE_DISABLE_PROMPTS=1
         CLOUDSDK="test"
     }
@@ -18,7 +18,7 @@ pipeline {
 
                 echo "Building ${CLOUDSDK}"
                 echo "Building ${HOME}"
-                echo "Database engine is ${SHA}"
+
                 sh './build_test.sh'
             }
         }

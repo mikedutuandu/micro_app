@@ -1,0 +1,2 @@
+docker build -t jenkins_micro_app -f Dockerfile.jenkins .
+docker run -d -p 8081:8080 -v /var/run/docker.sock:/var/run/docker.sock -v /Users/mikedu/Jenkins:/var/jenkins_home jenkins_micro_app

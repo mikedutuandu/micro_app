@@ -8,4 +8,4 @@ echo $AAA
 #gcloud config set project learn-drive-253814
 #gcloud config set compute/zone asia-southeast1-a
 #gcloud container clusters get-credentials standard-cluster-1
-docker build -t mikedutuandu/micro_teacher_test -f ./micro_teacher/Dockerfile.dev ./micro_teacher
+#docker build -t mikedutuandu/micro_teacher_test -f ./micro_teacher/Dockerfile.dev ./micro_teacher

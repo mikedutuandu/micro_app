@@ -19,7 +19,7 @@ pipeline {
                 echo "Building ${CLOUDSDK}"
                 echo "Building ${HOME}"
 
-                sh chmod +x './build_test.sh'
+                sh 'bash ./build_test.sh'
             }
         }
         stage('Test') {

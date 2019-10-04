@@ -4,6 +4,7 @@ pipeline {
     environment {
         SHA=sh 'git rev-parse HEAD'
         CLOUDSDK_CORE_DISABLE_PROMPTS=1
+        CLOUDSDK="test"
     }
 
     stages {
@@ -14,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Building'
+                echo 'Building ${CLOUDSDK}'
                 echo "Database engine is ${SHA}"
             }
         }

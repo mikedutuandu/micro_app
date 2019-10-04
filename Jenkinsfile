@@ -19,6 +19,8 @@ pipeline {
                 echo "Building ${CLOUDSDK}"
                 echo "Building ${HOME}"
                 echo "Database engine is ${SHA}"
+                sh 'export AAA=$(git rev-parse HEAD)'
+                echo "${AAA}"
             }
         }
         stage('Test') {

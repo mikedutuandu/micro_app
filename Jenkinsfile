@@ -20,7 +20,7 @@ pipeline {
                 echo "Building ${HOME}"
                 echo "Database engine is ${SHA}"
                 sh 'export AAA=$(git rev-parse HEAD)'
-                echo "${AAA}"
+                echo "$AAA"
             }
         }
         stage('Test') {

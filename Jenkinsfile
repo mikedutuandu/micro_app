@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SHA='$(git rev-parse HEAD)'
+        SHA=$(git rev-parse HEAD)
         CLOUDSDK_CORE_DISABLE_PROMPTS=1
     }
 

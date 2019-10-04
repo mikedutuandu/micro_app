@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Building ${CLOUDSDK}'
+                echo "Building ${CLOUDSDK}""
                 echo "Database engine is ${SHA}"
             }
         }

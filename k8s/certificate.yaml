@@ -1,9 +1,9 @@
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: mikedutuanducom-tls
+  name: mikedutuandu-com-tls
 spec:
-  secretName: mikedutuanducom
+  secretName: mikedutuandu-com
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer

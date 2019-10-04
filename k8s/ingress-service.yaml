@@ -12,7 +12,7 @@ spec:
     - hosts:
         - mikedutuandu.com
         - www.mikedutuandu.com
-      secretName: mikedutuanducom
+      secretName: mikedutuandu-com
   rules:
     - host: mikedutuandu.com
       http:

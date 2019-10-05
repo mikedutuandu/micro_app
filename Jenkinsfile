@@ -2,9 +2,7 @@ pipeline {
     agent any
 
     environment {
-
         CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        CLOUDSDK="test"
     }
 
     stages {
@@ -15,22 +13,19 @@ pipeline {
         }
         stage('Build') {
             steps {
-
-                echo "Building ${CLOUDSDK}"
-                echo "Building ${HOME}"
-
+                echo "Building ==============================================="
                 sh 'bash ./jenkins_build.sh'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing'
+                echo 'Testing ================================================='
                 sh 'bash ./jenkins_test.sh'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying'
+                echo 'Deploying ================================================'
                 sh 'bash ./jenkins_deploy.sh'
             }
         }

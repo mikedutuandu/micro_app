@@ -2,7 +2,7 @@
 
 - gRpc,protobuf for communicate
 - Gateway(2 gateway) to forward http to gRpc
-- Pub/sub for Domain Event  
+- Pub/sub for event driven source
 - Mongo for db(3 db)
 - Discovery services from kubenetes
 - Use docker, docker compose for dev
@@ -48,9 +48,16 @@
     - New Item > Pipeline
     - Build Triggers > Poll SCM: * * * * *
     - Set env for connect to docker hub
-        DOCKER_USERNAME="[your username]"
+        DOCKER_USERNAME="[your userna.me]"
         DOCKER_PASSWORD="[your password]"
     - Pipeline 
         + Config repo point to gitlap
         + Config point to Jenkinsfile of repo to run pipeline
    
+ # D. Fix some error relate go 1.13
+ Run command below before start this project
+[ https://medium.com/mabar/today-i-learned-fix-go-get-private-repository-return-error-reading-sum-golang-org-lookup-93058a058dd8]
+ 
+ export GOPRIVATE="gitlab.com/ileazycorp"
+ 
+ 

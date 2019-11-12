@@ -8,25 +8,25 @@ pipeline {
     stages {
         stage('Cloning Git') {
           steps {
-            git 'https://github.com/mikedutuandu/micro_app.git'
+            git 'git@gitlab.com:mikedutuandu/micro_app.git'
           }
         }
         stage('Build') {
             steps {
                 echo "Building ==============================================="
-                sh 'bash ./jenkins_build.sh'
+                //sh 'bash ./jenkins_build.sh'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing ================================================='
-                sh 'bash ./jenkins_test.sh'
+                //sh 'bash ./jenkins_test.sh'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying ================================================'
-                sh 'bash ./jenkins_deploy.sh'
+                //sh 'bash ./jenkins_deploy.sh'
             }
         }
     }

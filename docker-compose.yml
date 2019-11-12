@@ -4,9 +4,19 @@ services:
     restart: always
     build:
       dockerfile: Dockerfile.dev
-      context: ./nginx
+      context: ./config_nginx
     ports:
       - '8080:80'
+
+  event_store:
+    restart: always
+    image: golang:latest
+    volumes:
+      - ./event_store:/go/src/app
+    working_dir: /go/src/app
+    command: go run .
+    environment:
+      - PORT=3005
 
   gateway_learner:
     restart: always
@@ -22,11 +32,16 @@ services:
       - MICRO_LEARNER_PORT=3002
       - MICRO_BOOKING_HOST=micro_booking
       - MICRO_BOOKING_PORT=3003
+      - MICRO_PAYMENT_HOST=micro_payment
+      - MICRO_PAYMENT_PORT=3004
       - PORT=5002
     depends_on:
       - micro_teacher
       - micro_learner
       - micro_booking
+      - micro_payment
+      - micro_notification
+      - event_store
 
   gateway_teacher:
     restart: always
@@ -42,11 +57,17 @@ services:
       - MICRO_LEARNER_PORT=3002
       - MICRO_BOOKING_HOST=micro_booking
       - MICRO_BOOKING_PORT=3003
+      - MICRO_PAYMENT_HOST=micro_payment
+      - MICRO_PAYMENT_PORT=3004
       - PORT=5001
     depends_on:
       - micro_teacher
       - micro_learner
       - micro_booking
+      - micro_payment
+      - micro_notification
+      - event_store
+
 
   micro_teacher:
     restart: always
@@ -56,10 +77,8 @@ services:
     working_dir: /go/src/app
     command: go run .
     environment:
-      - MICRO_LEARNER_HOST=micro_learner
-      - MICRO_LEARNER_PORT=3002
-      - MICRO_BOOKING_HOST=micro_booking
-      - MICRO_BOOKING_PORT=3003
+      - MICRO_EVENT_HOST=event_store
+      - MICRO_EVENT_PORT=3005
       - PORT=3001
 
   micro_learner:
@@ -70,10 +89,8 @@ services:
     working_dir: /go/src/app
     command: go run .
     environment:
-      - MICRO_TEACHER_HOST=micro_teacher
-      - MICRO_TEACHER_PORT=3001
-      - MICRO_BOOKING_HOST=micro_booking
-      - MICRO_BOOKING_PORT=3003
+      - MICRO_EVENT_HOST=event_store
+      - MICRO_EVENT_PORT=3005
       - PORT=3002
 
   micro_booking:
@@ -84,10 +101,27 @@ services:
     working_dir: /go/src/app
     command: go run .
     environment:
-      - MICRO_TEACHER_HOST=micro_teacher
-      - MICRO_TEACHER_PORT=3001
-      - MICRO_LEARNER_HOST=micro_learner
-      - MICRO_LEARNER_PORT=3002
+      - MICRO_EVENT_HOST=event_store
+      - MICRO_EVENT_PORT=3005
       - PORT=3003
 
+  micro_payment:
+    restart: always
+    image: golang:latest
+    volumes:
+      - ./micro_payment:/go/src/app
+    working_dir: /go/src/app
+    command: go run .
+    environment:
+      - MICRO_EVENT_HOST=event_store
+      - MICRO_EVENT_PORT=3005
+      - PORT=3004
+
+  micro_notification:
+    restart: always
+    image: golang:latest
+    volumes:
+      - ./micro_notification:/go/src/app
+    working_dir: /go/src/app
+    command: go run .
 

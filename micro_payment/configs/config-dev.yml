@@ -1,0 +1,18 @@
+grpc:
+  portDefault: 3004
+
+sub:
+  projectID: learn-drive-253814
+
+repo:
+  mongoConnectString: mongodb+srv://admin:110289@bookingcluster-tgpah.gcp.mongodb.net/test?retryWrites=true&w=majority
+  mongoDBName: payments
+
+event:
+  eventHostDefault: ""
+  eventPortDefault: 3005
+
+jwt:
+  secretKey: mySuperSecretKeyLol
+  tokenExpired: 72 #hour
+  issuer: micro_payment #hour

@@ -1,5 +1,12 @@
 /micro_booking/vendor
 /micro_learner/vendor
 /micro_teacher/vendor
+/micro_payment/vendor
+/micro_notification/vendor
+/micro_chat/node_modules
 /gateway_learner/vendor
 /gateway_teacher/vendor
+/gateway_admin/vendor
+/event_store/vendor/
+
+.idea/

@@ -9,3 +9,5 @@ micro:
   learnerPortDefault: 3002
   bookingHostDefault: ""
   bookingPortDefault: 3003
+  paymentHostDefault: ""
+  paymentPortDefault: 3004

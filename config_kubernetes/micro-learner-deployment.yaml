@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-learner-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: micro-learner
+  template:
+    metadata:
+      labels:
+        component: micro-learner
+    spec:
+      containers:
+        - name: micro-learner
+          image: mikedutuandu/micro_learner
+          ports:
+            - containerPort: 3002
+          env:
+            - name: MICRO_TEACHER_HOST
+              value: micro-teacher-cluster-ip-service
+            - name: MICRO_TEACHER_PORT
+              value: '3001'
+            - name: MICRO_BOOKING_HOST
+              value: micro-booking-cluster-ip-service
+            - name: MICRO_BOOKING_PORT
+              value: '3003'
+
+      imagePullSecrets:
+        - name: regcred

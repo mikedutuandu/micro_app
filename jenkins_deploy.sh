@@ -18,7 +18,7 @@ docker push mikedutuandu/micro_booking:$SHA
 docker push mikedutuandu/gateway_teacher:$SHA
 docker push mikedutuandu/gateway_learner:$SHA
 
-kubectl apply -f k8s
+kubectl apply -f config_kubernetes
 kubectl set image deployments/micro-teacher-deployment micro-teacher=mikedutuandu/micro_teacher:$SHA
 kubectl set image deployments/micro-learner-deployment micro-learner=mikedutuandu/micro_learner:$SHA
 kubectl set image deployments/micro-booking-deployment micro-booking=mikedutuandu/micro_booking:$SHA

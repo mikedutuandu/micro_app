@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-booking-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: micro-booking
+  template:
+    metadata:
+      labels:
+        component: micro-booking
+    spec:
+      containers:
+        - name: micro-booking
+          image: mikedutuandu/micro_booking
+          ports:
+            - containerPort: 3003
+          env:
+            - name: MICRO_TEACHER_HOST
+              value: micro-teacher-cluster-ip-service
+            - name: MICRO_TEACHER_PORT
+              value: '3001'
+            - name: MICRO_LEARNER_HOST
+              value: micro-learner-cluster-ip-service
+            - name: MICRO_LEARNER_PORT
+              value: '3002'
+
+      imagePullSecrets:
+        - name: regcred

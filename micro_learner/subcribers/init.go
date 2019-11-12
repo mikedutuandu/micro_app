@@ -9,7 +9,7 @@ import (
 )
 
 
-var BookingSub bookingSubscriber
+var EventSub eventSubscriber
 func Init()  {
 	//Init
 	ctx := context.Background()
@@ -20,10 +20,10 @@ func Init()  {
 	if err != nil {
 		// TODO: Handle error.
 	}
-	BookingSub.client = client
+	EventSub.client = client
 
 	//Subscribe
-	go BookingSub.SubHello()
+	go EventSub.SubHello()
 	println("Init Sub")
 
 }

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package micro_payment;
+
+option go_package = "micro_payment_pb";
+
+
+
+
+
+message HelloRequest {
+
+}
+message HelloResponse {
+
+}
+
+
+
+service PaymentService {
+    rpc Hello(HelloRequest) returns (HelloResponse);
+
+}

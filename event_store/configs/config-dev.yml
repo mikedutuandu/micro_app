@@ -1,0 +1,9 @@
+grpc:
+  portDefault: 3005
+
+pub:
+  projectID: learn-drive-253814
+
+repo:
+  mongoConnectString: mongodb+srv://admin:110289@bookingcluster-tgpah.gcp.mongodb.net/test?retryWrites=true&w=majority
+  mongoDBName: events

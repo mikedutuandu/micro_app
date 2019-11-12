@@ -7,7 +7,6 @@ import (
 	repo "github.com/mikedutuandu/micro_app/micro_teacher/repositories"
 	services "github.com/mikedutuandu/micro_app/micro_teacher/services"
 	handlers "github.com/mikedutuandu/micro_app/micro_teacher/handlers"
-	publishers "github.com/mikedutuandu/micro_app/micro_teacher/publishers"
 	"github.com/spf13/viper"
 )
 
@@ -27,7 +26,6 @@ func main() {
 	initConfig()
 	repo.Init()
 	services.Init()
-	publishers.Init()
 
 	//Init Subscribe for handle event driven data
 	subcribers.Init()

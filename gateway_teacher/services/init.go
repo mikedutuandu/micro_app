@@ -4,6 +4,7 @@ import (
 	"fmt"
 	micro_booking_pb "github.com/mikedutuandu/micro_app/micro_booking/protos"
 	micro_learner_pb "github.com/mikedutuandu/micro_app/micro_learner/protos"
+	micro_payment_pb "github.com/mikedutuandu/micro_app/micro_payment/protos"
 	micro_teacher_pb "github.com/mikedutuandu/micro_app/micro_teacher/protos"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
@@ -43,6 +44,15 @@ func Init() {
 		microTeacherPort =  viper.GetString("micro.teacherPortDefault")
 	}
 
+	var microPaymentHost = os.Getenv("MICRO_PAYMENT_HOST")
+	if microPaymentHost == ""{
+		microPaymentHost =  viper.GetString("micro.paymentHostDefault")
+	}
+	var microPaymentPort = os.Getenv("MICRO_PAYMENT_PORT")
+	if microPaymentPort == "" {
+		microPaymentPort =  viper.GetString("micro.paymentPortDefault")
+	}
+
 
 	tls := false
 	opts := grpc.WithInsecure()
@@ -75,7 +85,10 @@ func Init() {
 	}
 	//defer ccTeacher.Close()
 
-
+	ccPayment, err := grpc.Dial(microPaymentHost+":"+microPaymentPort, opts)
+	if err != nil {
+		log.Fatalf("could not connect: %v", err)
+	}
 
 
 	learnerClient := micro_learner_pb.NewLearnerServiceClient(ccLearner)
@@ -90,11 +103,14 @@ func Init() {
 	teacherClient := micro_teacher_pb.NewTeacherServiceClient(ccTeacher)
 	fmt.Printf("Created client: %f", teacherClient)
 
+	paymentClient := micro_payment_pb.NewPaymentServiceClient(ccPayment)
+	fmt.Printf("Created client: %f", bookingClient)
 
 	MicroCLI.MicroLearnerClient = learnerClient
 	MicroCLI.MicroBookingClient = bookingClient
 	MicroCLI.MicroTeacherClient = teacherClient
 	MicroCLI.MicroTeacherAuthClient = teacherAuthClient
+	MicroCLI.MicroPaymentClient = paymentClient
 
 	println("Init Service")
 

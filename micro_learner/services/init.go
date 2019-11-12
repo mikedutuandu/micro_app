@@ -1,41 +1,32 @@
 package services
 
 import (
-	micro_booking_pb "github.com/mikedutuandu/micro_app/micro_booking/protos"
-	micro_teacher_pb "github.com/mikedutuandu/micro_app/micro_teacher/protos"
+	"fmt"
 	"github.com/spf13/viper"
+	micro_event_pb "github.com/mikedutuandu/micro_app/event_store/protos"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
-	"os"
 	"log"
-	"fmt"
+	"os"
 )
 
 var TokenSv TokenService
-var MicroCLI MicroClient
+var EventClient micro_event_pb.EventStoreServiceClient
+
 func Init() {
 	//1. Init token service
 	TokenSv = TokenService{}
+	//2. Init event client service
 
-	//2. Init micro client service
-	var microTeacherHost = os.Getenv("MICRO_TEACHER_HOST")
-	if microTeacherHost == ""{
-		microTeacherHost = viper.GetString("micro.teacherHostDefault")
-	}
-	var microTeacherPort = os.Getenv("MICRO_TEACHER_PORT")
-	if microTeacherPort == "" {
-		microTeacherPort = viper.GetString("micro.teacherPortDefault")
-	}
 
-	var microBookingHost = os.Getenv("MICRO_BOOKING_HOST")
-	if microBookingHost == ""{
-		microBookingHost = viper.GetString("micro.bookingHostDefault")
+	var microEventHost = os.Getenv("MICRO_EVENT_HOST")
+	if microEventHost == ""{
+		microEventHost =  viper.GetString("event.eventHostDefault")
 	}
-	var microBookingPort = os.Getenv("MICRO_BOOKING_PORT")
-	if microBookingPort == "" {
-		microBookingPort = viper.GetString("micro.bookingPortDefault")
+	var microEventPort = os.Getenv("MICRO_EVENT_PORT")
+	if microEventPort == "" {
+		microEventPort =  viper.GetString("event.eventPortDefault")
 	}
-
 
 	tls := false
 	opts := grpc.WithInsecure()
@@ -48,29 +39,19 @@ func Init() {
 		opts = grpc.WithTransportCredentials(creds)
 	}
 
-	ccTeacher, err := grpc.Dial(microTeacherHost+":"+microTeacherPort, opts)
+
+	ccEvent, err := grpc.Dial(microEventHost+":"+microEventPort, opts)
 	if err != nil {
 		log.Fatalf("could not connect: %v", err)
 	}
-	//defer ccLearner.Close()
 
 
-	ccBooking, err := grpc.Dial(microBookingHost+":"+microBookingPort, opts)
-	if err != nil {
-		log.Fatalf("could not connect: %v", err)
-	}
-	//defer ccBooking.Close()
+
+	eventClient := micro_event_pb.NewEventStoreServiceClient(ccEvent)
+	fmt.Printf("Created client: %f", eventClient)
 
 
-	teacherClient := micro_teacher_pb.NewTeacherServiceClient(ccTeacher)
-	fmt.Printf("Created client: %f", teacherClient)
-
-	bookingClient := micro_booking_pb.NewBookingServiceClient(ccBooking)
-	fmt.Printf("Created client: %f", bookingClient)
-
-
-	MicroCLI.MicroTeacherClient = teacherClient
-	MicroCLI.MicroBookingClient = bookingClient
+	EventClient = eventClient
 
 	println("Init Service")
 

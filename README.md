@@ -1,13 +1,5 @@
 # Code base micro services by golang
 
-- gRpc,protobuf for communicate
-- Gateway(2 gateway) to forward http to gRpc
-- Pub/sub for event driven source
-- Mongo for db(3 db)
-- Discovery services from kubenetes
-- Use docker, docker compose for dev
-- Use docker, Kubenetes for production
-- Use travis ci or jenkins for CI,CD
 
 # A. Note for development when run docker compose
 
